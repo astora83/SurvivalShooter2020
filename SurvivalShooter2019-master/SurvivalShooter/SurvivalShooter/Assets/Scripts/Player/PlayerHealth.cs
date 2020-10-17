@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public CameraShake cameraShake;
     public int startingHealth = 100;
     public int currentHealth;
     public Slider healthSlider;
@@ -38,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
         if(damaged)
         {
             damageImage.color = flashColour;
+            StartCoroutine(cameraShake.Shake(.15f, .4f));
         }
         else
         {
