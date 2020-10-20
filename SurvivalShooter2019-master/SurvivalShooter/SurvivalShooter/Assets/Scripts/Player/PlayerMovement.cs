@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
+
 {
+	public ParticleSystem dust;
+
 	public float speed = 6f;
 
 	private Vector3 movement;
@@ -31,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		movement.Set(h, 0f, v);
 		movement = movement.normalized * speed * Time.deltaTime;
-
+		CreateDust();
 		playerRigidbody.MovePosition(transform.position + movement);
 	}
 
@@ -39,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit floorHit;
+		CreateDust();
 
 		if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask)) {
 			Vector3 playerToMouse = floorHit.point - transform.position;
@@ -55,4 +59,10 @@ public class PlayerMovement : MonoBehaviour
 
 		anim.SetBool("IsWalking", walking);
 	}
+
+	void CreateDust()
+	{
+		dust.Play();
+	}
+
 }
